@@ -22,7 +22,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "W:\\Projects\\CascadeEnergy\\php-distributed-operations"
+      "url": "git@github.com:cberube/php-distributed-operations.git"
     }
   ],
   "require": {

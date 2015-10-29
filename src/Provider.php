@@ -7,7 +7,7 @@ use CascadeEnergy\DistributedOperations\Utility\ProviderInterface;
 use Elasticsearch\Helper\Iterators\SearchHitIterator;
 use Elasticsearch\Helper\Iterators\SearchResponseIterator;
 
-class Provider implements ProviderInterface, ElasticsearchUtilityInterface, \Iterator
+class Provider implements ProviderInterface, ElasticsearchUtilityInterface, \IteratorAggregate
 {
     use ElasticsearchUtilityTrait;
 
@@ -38,7 +38,7 @@ class Provider implements ProviderInterface, ElasticsearchUtilityInterface, \Ite
         $this->responseIterator = new SearchResponseIterator($this->client, $searchParams);
         $this->hitIterator = new SearchHitIterator($this->responseIterator);
 
-        return $this;
+        return new ProviderIterator($this->hitIterator);
     }
 
     public function setScrollTime($scrollTime)
@@ -49,37 +49,5 @@ class Provider implements ProviderInterface, ElasticsearchUtilityInterface, \Ite
     public function setType($type)
     {
         $this->type = $type;
-    }
-
-    public function current()
-    {
-        $hit = $this->hitIterator->current();
-        $source = $hit['source'];
-
-        $operation = new Operation($source['batchId'], $hit['_type'], $source['options']);
-        $operation->setState($source['state']);
-        $operation->setDisposition($source['disposition']);
-
-        return $operation;
-    }
-
-    public function next()
-    {
-        $this->hitIterator->next();
-    }
-
-    public function key()
-    {
-        return $this->hitIterator->key();
-    }
-
-    public function valid()
-    {
-        return $this->hitIterator->valid();
-    }
-
-    public function rewind()
-    {
-        $this->hitIterator->rewind();
     }
 }

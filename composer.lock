@@ -4,16 +4,22 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9b55010b92a99a5791f95a3e6abf9907",
-    "content-hash": "ebb2aa74432972c7b4f308f59201e053",
+    "hash": "4822e070b6d7564e2538b8742cb491e8",
+    "content-hash": "29b97141e3b096374867350dfc994cea",
     "packages": [
         {
             "name": "cascade-energy/php-distributed-operations",
             "version": "0.1.x-dev",
             "source": {
                 "type": "git",
-                "url": "W:\\Projects\\CascadeEnergy\\php-distributed-operations",
-                "reference": "dd55a1bbc68e3a9cb94f1a44164c2fb96809f850"
+                "url": "https://github.com/cberube/php-distributed-operations.git",
+                "reference": "ab8d239c00ece76e150ed7f848de248216298866"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cberube/php-distributed-operations/zipball/ab8d239c00ece76e150ed7f848de248216298866",
+                "reference": "ab8d239c00ece76e150ed7f848de248216298866",
+                "shasum": ""
             },
             "type": "library",
             "autoload": {
@@ -31,7 +37,10 @@
                 }
             ],
             "description": "Distributed operations storage and monitoring interfaces",
-            "time": "2015-10-29 03:03:12"
+            "support": {
+                "source": "https://github.com/cberube/php-distributed-operations/tree/0.1"
+            },
+            "time": "2015-10-29 03:10:26"
         },
         {
             "name": "elasticsearch/elasticsearch",
