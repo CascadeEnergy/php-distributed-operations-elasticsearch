@@ -28,16 +28,16 @@ class Waiter implements WaiterInterface, UtilityFactoryConsumerInterface
         $this->delayTime = $delayTime;
     }
 
-    public function isBatchDone($batchId)
+    public function getBatchItemsRemaining($batchId)
     {
         $counter = $this->getCounter($batchId);
+        $itemsRemaining = $counter->getCount();
 
-        if ($counter->getCount() == 0) {
+        if ($itemsRemaining == 0) {
             $this->deleteCounter($batchId);
-            return true;
         }
 
-        return false;
+        return $itemsRemaining;
     }
 
     public function waitForBatch($batchId)
