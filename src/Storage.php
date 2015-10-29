@@ -4,15 +4,53 @@ namespace CascadeEnergy\DistributedOperations\Elasticsearch;
 
 use CascadeEnergy\DistributedOperations\OperationInterface;
 use CascadeEnergy\DistributedOperations\Utility\StorageInterface;
+use Elasticsearch\Client;
 
-class Storage implements StorageInterface, ElasticsearchUtilityInterface
+class Storage implements StorageInterface
 {
-    use ElasticsearchUtilityTrait;
+    /** @var Client */
+    private $client;
+
+    /** @var string */
+    private $readFromIndex;
+
+    /** @var string */
+    private $writeToIndex;
+
+    /**
+     * @param Client $client
+     */
+    public function setClient(Client $client)
+    {
+        $this->client = $client;
+    }
+
+    /**
+     * @param string $readFromIndex
+     */
+    public function setReadFromIndex($readFromIndex)
+    {
+        $this->readFromIndex = $readFromIndex;
+    }
+
+    /**
+     * @param string $writeToIndex
+     */
+    public function setWriteToIndex($writeToIndex)
+    {
+        $this->writeToIndex = $writeToIndex;
+    }
 
     public function reload(OperationInterface $operation)
     {
+        $indexName = $operation->getStorageAttribute('indexName');
+
+        if (empty($indexName)) {
+            $indexName = $this->readFromIndex;
+        }
+
         $hit = $this->client->get([
-            'index' => $operation->getStorageAttribute('indexName'),
+            'index' => $indexName,
             'id' => $operation->getId()
         ]);
 
@@ -32,7 +70,7 @@ class Storage implements StorageInterface, ElasticsearchUtilityInterface
         if (empty($indexName)) {
             $dateTime = new \DateTime('now', new \DateTimeZone('UTC'));
             $dateTimeFormatted = $dateTime->format('Y-m');
-            $indexName = "{$this->indexName}-$dateTimeFormatted";
+            $indexName = "{$this->writeToIndex}-$dateTimeFormatted";
             $operation->setStorageAttribute('indexName', $indexName);
         }
 
