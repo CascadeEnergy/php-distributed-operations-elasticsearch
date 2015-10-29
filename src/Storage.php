@@ -12,7 +12,7 @@ class Storage implements StorageInterface, ElasticsearchUtilityInterface
     public function reload(OperationInterface $operation)
     {
         $hit = $this->client->get([
-            'index' => $this->indexName,
+            'index' => $operation->getStorageAttribute('indexName'),
             'id' => $operation->getId()
         ]);
 
@@ -27,8 +27,17 @@ class Storage implements StorageInterface, ElasticsearchUtilityInterface
 
     public function store(OperationInterface $operation)
     {
+        $indexName = $operation->getStorageAttribute('indexName');
+
+        if (empty($indexName)) {
+            $dateTime = new \DateTime('now', new \DateTimeZone('UTC'));
+            $dateTimeFormatted = $dateTime->format('Y-m');
+            $indexName = "{$this->indexName}-$dateTimeFormatted";
+            $operation->setStorageAttribute('indexName', $indexName);
+        }
+
         $parameters = [
-            'index' => $this->indexName,
+            'index' => $indexName,
             'type' => $operation->getType(),
             'body' => [
                 'state' => $operation->getState(),
