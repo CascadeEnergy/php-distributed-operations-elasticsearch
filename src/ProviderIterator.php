@@ -20,7 +20,7 @@ class ProviderIterator implements \Iterator
         $hit = $this->hitIterator->current();
         $source = $hit['_source'];
 
-        $operation = new Operation($source['batchId'], $hit['_type'], $source['options']);
+        $operation = new Operation($hit['_type'], $source['batchId'], $source['options']);
         $operation->setState($source['state']);
         $operation->setDisposition($source['disposition']);
         $operation->setId($hit['_id']);
