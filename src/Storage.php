@@ -21,6 +21,7 @@ class Storage implements StorageInterface, ReadWriteInterface
 
         $hit = $this->client->get([
             'index' => $indexName,
+            'type' => $operation->getType(),
             'id' => $operation->getId()
         ]);
 
