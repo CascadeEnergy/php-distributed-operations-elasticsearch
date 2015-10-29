@@ -2,11 +2,14 @@
 
 namespace CascadeEnergy\DistributedOperations\Elasticsearch;
 
+use CascadeEnergy\DistributedOperations\Elasticsearch\Interfaces\ClientConsumerInterface;
+use CascadeEnergy\DistributedOperations\Elasticsearch\Interfaces\ReadOnlyInterface;
+use CascadeEnergy\DistributedOperations\Elasticsearch\Traits\ReadOnlyTrait;
 use CascadeEnergy\DistributedOperations\Utility\AbstractCounter;
 
-class Counter extends AbstractCounter implements ElasticsearchUtilityInterface
+class Counter extends AbstractCounter implements ReadOnlyInterface, ClientConsumerInterface
 {
-    use ElasticsearchUtilityTrait;
+    use ReadOnlyTrait;
 
     public function getCount()
     {

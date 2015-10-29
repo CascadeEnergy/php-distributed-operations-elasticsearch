@@ -2,44 +2,14 @@
 
 namespace CascadeEnergy\DistributedOperations\Elasticsearch;
 
+use CascadeEnergy\DistributedOperations\Elasticsearch\Interfaces\ReadWriteInterface;
+use CascadeEnergy\DistributedOperations\Elasticsearch\Traits\ReadWriteTrait;
 use CascadeEnergy\DistributedOperations\OperationInterface;
 use CascadeEnergy\DistributedOperations\Utility\StorageInterface;
-use Elasticsearch\Client;
 
-class Storage implements StorageInterface
+class Storage implements StorageInterface, ReadWriteInterface
 {
-    /** @var Client */
-    private $client;
-
-    /** @var string */
-    private $readFromIndex;
-
-    /** @var string */
-    private $writeToIndex;
-
-    /**
-     * @param Client $client
-     */
-    public function setClient(Client $client)
-    {
-        $this->client = $client;
-    }
-
-    /**
-     * @param string $readFromIndex
-     */
-    public function setReadFromIndex($readFromIndex)
-    {
-        $this->readFromIndex = $readFromIndex;
-    }
-
-    /**
-     * @param string $writeToIndex
-     */
-    public function setWriteToIndex($writeToIndex)
-    {
-        $this->writeToIndex = $writeToIndex;
-    }
+    use ReadWriteTrait;
 
     public function reload(OperationInterface $operation)
     {

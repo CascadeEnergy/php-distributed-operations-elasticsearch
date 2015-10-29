@@ -2,6 +2,10 @@
 
 namespace CascadeEnergy\DistributedOperations\Elasticsearch;
 
+use CascadeEnergy\DistributedOperations\Elasticsearch\Interfaces\ClientConsumerInterface;
+use CascadeEnergy\DistributedOperations\Elasticsearch\Interfaces\ReadOnlyInterface;
+use CascadeEnergy\DistributedOperations\Elasticsearch\Interfaces\ReadWriteInterface;
+use CascadeEnergy\DistributedOperations\Elasticsearch\Traits\ReadWriteTrait;
 use CascadeEnergy\DistributedOperations\Utility\CounterInterface;
 use CascadeEnergy\DistributedOperations\Utility\ProviderInterface;
 use CascadeEnergy\DistributedOperations\Utility\StorageInterface;
@@ -9,9 +13,9 @@ use CascadeEnergy\DistributedOperations\Utility\UtilityFactoryConsumerInterface;
 use CascadeEnergy\DistributedOperations\Utility\UtilityFactoryInterface;
 use CascadeEnergy\DistributedOperations\Utility\WaiterInterface;
 
-class UtilityFactory implements UtilityFactoryInterface
+class UtilityFactory implements UtilityFactoryInterface, ReadWriteInterface
 {
-    use ElasticsearchUtilityTrait;
+    use ReadWriteTrait;
 
     /**
      * @return CounterInterface
@@ -45,14 +49,20 @@ class UtilityFactory implements UtilityFactoryInterface
         return $this->configureObject(new Waiter());
     }
 
-    /**
-     * @param ElasticsearchUtilityInterface $object
-     * @return ElasticsearchUtilityInterface
-     */
-    private function configureObject(ElasticsearchUtilityInterface $object)
+    private function configureObject($object)
     {
-        $object->setClient($this->client);
-        $object->setIndexName($this->indexName);
+        if ($object instanceof ClientConsumerInterface) {
+            $object->setClient($this->client);
+        }
+
+        if ($object instanceof ReadOnlyInterface) {
+            $object->setIndexName($this->readFromIndex);
+        }
+
+        if ($object instanceof ReadWriteInterface) {
+            $object->setReadFromIndex($this->readFromIndex);
+            $object->setWriteToIndex($this->writeToIndex);
+        }
 
         if ($object instanceof UtilityFactoryConsumerInterface) {
             $object->setUtilityFactory($this);

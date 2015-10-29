@@ -3,12 +3,12 @@
 namespace CascadeEnergy\DistributedOperations\Elasticsearch;
 
 use CascadeEnergy\DistributedOperations\Operation;
+use CascadeEnergy\DistributedOperations\Utility\UtilityFactoryConsumerInterface;
 use CascadeEnergy\DistributedOperations\Utility\UtilityFactoryConsumerTrait;
 use CascadeEnergy\DistributedOperations\Utility\WaiterInterface;
 
-class Waiter implements WaiterInterface, ElasticsearchUtilityInterface
+class Waiter implements WaiterInterface, UtilityFactoryConsumerInterface
 {
-    use ElasticsearchUtilityTrait;
     use UtilityFactoryConsumerTrait;
 
     const DEFAULT_DELAY_TIME = 5;

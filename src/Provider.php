@@ -2,12 +2,14 @@
 
 namespace CascadeEnergy\DistributedOperations\Elasticsearch;
 
+use CascadeEnergy\DistributedOperations\Elasticsearch\Interfaces\ReadOnlyInterface;
+use CascadeEnergy\DistributedOperations\Elasticsearch\Traits\ReadOnlyTrait;
 use CascadeEnergy\DistributedOperations\Utility\ProviderInterface;
 use Elasticsearch\Helper\Iterators\SearchResponseIterator;
 
-class Provider implements ProviderInterface, ElasticsearchUtilityInterface
+class Provider implements ProviderInterface, ReadOnlyInterface
 {
-    use ElasticsearchUtilityTrait;
+    use ReadOnlyTrait;
 
     /** @var string */
     private $scrollTime = '1m';
