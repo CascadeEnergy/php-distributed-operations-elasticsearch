@@ -23,6 +23,7 @@ class ProviderIterator implements \Iterator
         $operation = new Operation($source['batchId'], $hit['_type'], $source['options']);
         $operation->setState($source['state']);
         $operation->setDisposition($source['disposition']);
+        $operation->setId($hit['_id']);
 
         return $operation;
     }
