@@ -2,20 +2,12 @@
 
 namespace CascadeEnergy\DistributedOperations\Elasticsearch;
 
-use CascadeEnergy\DistributedOperations\Operation;
 use CascadeEnergy\DistributedOperations\Utility\ProviderInterface;
-use Elasticsearch\Helper\Iterators\SearchHitIterator;
 use Elasticsearch\Helper\Iterators\SearchResponseIterator;
 
-class Provider implements ProviderInterface, ElasticsearchUtilityInterface, \IteratorAggregate
+class Provider implements ProviderInterface, ElasticsearchUtilityInterface
 {
     use ElasticsearchUtilityTrait;
-
-    /** @var SearchResponseIterator */
-    private $responseIterator;
-
-    /** @var SearchHitIterator */
-    private $hitIterator;
 
     /** @var string */
     private $scrollTime = '1m';
@@ -23,7 +15,17 @@ class Provider implements ProviderInterface, ElasticsearchUtilityInterface, \Ite
     /** @var string */
     private $type;
 
-    public function getIterator()
+    public function setScrollTime($scrollTime)
+    {
+        $this->scrollTime = $scrollTime;
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    public function begin()
     {
         $searchParams = [
             'index' => $this->indexName,
@@ -35,19 +37,15 @@ class Provider implements ProviderInterface, ElasticsearchUtilityInterface, \Ite
             $searchParams['type'] = $this->type;
         }
 
-        $this->responseIterator = new SearchResponseIterator($this->client, $searchParams);
-        $this->hitIterator = new SearchHitIterator($this->responseIterator);
+        $responseIterator = new SearchResponseIterator($this->client, $searchParams);
 
-        return new ProviderIterator($this->hitIterator);
+        return new ProviderIterator($responseIterator);
     }
 
-    public function setScrollTime($scrollTime)
+    public function end(\Traversable $providerIterator)
     {
-        $this->scrollTime = $scrollTime;
-    }
-
-    public function setType($type)
-    {
-        $this->type = $type;
+        if ($providerIterator instanceof ProviderIterator) {
+            $providerIterator->end();
+        }
     }
 }

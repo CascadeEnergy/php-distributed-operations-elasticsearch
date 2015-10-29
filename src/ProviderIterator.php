@@ -4,15 +4,25 @@ namespace CascadeEnergy\DistributedOperations\Elasticsearch;
 
 use CascadeEnergy\DistributedOperations\Operation;
 use Elasticsearch\Helper\Iterators\SearchHitIterator;
+use Elasticsearch\Helper\Iterators\SearchResponseIterator;
 
 class ProviderIterator implements \Iterator
 {
     /** @var SearchHitIterator */
     private $hitIterator;
 
-    public function __construct(SearchHitIterator $hitIterator)
+    /** @var SearchResponseIterator */
+    private $searchResponseIterator;
+
+    public function __construct(SearchResponseIterator $searchResponseIterator)
     {
-        $this->hitIterator = $hitIterator;
+        $this->searchResponseIterator = $searchResponseIterator;
+        $this->hitIterator = new SearchHitIterator($searchResponseIterator);
+    }
+
+    public function end()
+    {
+        $this->searchResponseIterator->__destruct();
     }
 
     public function current()
