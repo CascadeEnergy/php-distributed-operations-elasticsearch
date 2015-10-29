@@ -18,7 +18,7 @@ class ProviderIterator implements \Iterator
     public function current()
     {
         $hit = $this->hitIterator->current();
-        $source = $hit['source'];
+        $source = $hit['_source'];
 
         $operation = new Operation($source['batchId'], $hit['_type'], $source['options']);
         $operation->setState($source['state']);
