@@ -29,17 +29,19 @@ class Provider implements ProviderInterface, ReadOnlyInterface
 
     public function begin()
     {
+        $body = [
+            'query' => [
+                'function_score' => [
+                    'query' => ['term' => ['state' => 'new']],
+                    'random_score' => new \stdClass()
+                ]
+            ]
+        ];
+
         $searchParams = [
             'index' => $this->indexName,
             'scroll' => $this->scrollTime,
-            'body' => [
-                'query' => [
-                    'function_score' => [
-                        'query' => ['term' => ['state' => 'new']],
-                        'random_score' => []
-                    ]
-                ]
-            ]
+            'body' => $body
         ];
 
         if (!empty($this->type)) {
