@@ -3,8 +3,6 @@
 namespace CascadeEnergy\DistributedOperations\Elasticsearch;
 
 use CascadeEnergy\DistributedOperations\Operation;
-use Elasticsearch\Helper\Iterators\SearchHitIterator;
-use Elasticsearch\Helper\Iterators\SearchResponseIterator;
 
 class ProviderIterator implements \Iterator
 {

@@ -5,7 +5,6 @@ namespace CascadeEnergy\DistributedOperations\Elasticsearch;
 use CascadeEnergy\DistributedOperations\Elasticsearch\Interfaces\ReadOnlyInterface;
 use CascadeEnergy\DistributedOperations\Elasticsearch\Traits\ReadOnlyTrait;
 use CascadeEnergy\DistributedOperations\Utility\ProviderInterface;
-use Elasticsearch\Helper\Iterators\SearchResponseIterator;
 
 class Provider implements ProviderInterface, ReadOnlyInterface
 {
@@ -51,5 +50,9 @@ class Provider implements ProviderInterface, ReadOnlyInterface
         $results = $this->client->search($searchParams);
 
         return new ProviderIterator($results);
+    }
+
+    public function end(\Traversable $providerIterator)
+    {
     }
 }
