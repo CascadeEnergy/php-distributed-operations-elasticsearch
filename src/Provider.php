@@ -32,7 +32,14 @@ class Provider implements ProviderInterface, ReadOnlyInterface
         $searchParams = [
             'index' => $this->indexName,
             'scroll' => $this->scrollTime,
-            'body' => ['query' => ['bool' => ['must' => ['term' => ['state' => 'new']]]]]
+            'body' => [
+                'query' => [
+                    'function_score' => [
+                        'query' => ['term' => ['state' => 'new']],
+                        'random_score' => []
+                    ]
+                ]
+            ]
         ];
 
         if (!empty($this->type)) {
