@@ -48,15 +48,8 @@ class Provider implements ProviderInterface, ReadOnlyInterface
             $searchParams['type'] = $this->type;
         }
 
-        $responseIterator = new SearchResponseIterator($this->client, $searchParams);
+        $results = $this->client->search($searchParams);
 
-        return new ProviderIterator($responseIterator);
-    }
-
-    public function end(\Traversable $providerIterator)
-    {
-        if ($providerIterator instanceof ProviderIterator) {
-            $providerIterator->end();
-        }
+        return new ProviderIterator($results);
     }
 }

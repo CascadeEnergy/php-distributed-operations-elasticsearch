@@ -8,21 +8,15 @@ use Elasticsearch\Helper\Iterators\SearchResponseIterator;
 
 class ProviderIterator implements \Iterator
 {
-    /** @var SearchHitIterator */
+    /** @var array The raw Elasticsearch response we are iterating through */
+    private $response;
+
     private $hitIterator;
 
-    /** @var SearchResponseIterator */
-    private $searchResponseIterator;
-
-    public function __construct(SearchResponseIterator $searchResponseIterator)
+    public function __construct(array $response)
     {
-        $this->searchResponseIterator = $searchResponseIterator;
-        $this->hitIterator = new SearchHitIterator($searchResponseIterator);
-    }
-
-    public function end()
-    {
-        $this->searchResponseIterator->__destruct();
+        $this->response = $response;
+        $this->hitIterator = new \ArrayIterator($response['hits']['hits']);
     }
 
     public function current()
