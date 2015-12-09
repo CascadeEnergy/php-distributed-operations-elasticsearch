@@ -16,6 +16,9 @@ class Provider implements ProviderInterface, ReadOnlyInterface
     /** @var string */
     private $type;
 
+    /** @var string */
+    private $channel;
+
     public function setScrollTime($scrollTime)
     {
         $this->scrollTime = $scrollTime;
@@ -26,12 +29,27 @@ class Provider implements ProviderInterface, ReadOnlyInterface
         $this->type = $type;
     }
 
+    public function setChannel($channel)
+    {
+        $this->channel = $channel;
+    }
+
     public function begin()
     {
+        $must = [
+            ['term' => ['state' => 'new']]
+        ];
+
+        if (!empty($this->channel)) {
+            $must[] = ['term' => ['channel' => $this->channel]];
+        }
+
+        $query = ['bool' => ['must' => $must]];
+
         $body = [
             'query' => [
                 'function_score' => [
-                    'query' => ['term' => ['state' => 'new']],
+                    'query' => $query,
                     'random_score' => new \stdClass()
                 ]
             ]
