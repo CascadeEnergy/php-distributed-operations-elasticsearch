@@ -27,6 +27,7 @@ class ProviderIterator implements \Iterator
         $operation->setDisposition($source['disposition']);
         $operation->setId($hit['_id']);
         $operation->setStorageAttribute('indexName', $hit['_index']);
+        $operation->setChannel($source['channel']);
 
         return $operation;
     }
