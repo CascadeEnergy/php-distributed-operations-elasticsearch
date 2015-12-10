@@ -44,7 +44,10 @@ class Provider implements ProviderInterface, ReadOnlyInterface
             $must[] = ['term' => ['channel' => $this->channel]];
         }
 
-        $query = ['bool' => ['must' => $must]];
+        $now = time() * 1000;
+        $must[] = ['range' => ['preconditions.notBefore' => ['lt' => $now]]];
+
+        $query = ['bool' => ['filter' => $must]];
 
         $body = [
             'query' => [

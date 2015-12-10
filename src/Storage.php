@@ -32,6 +32,7 @@ class Storage implements StorageInterface, ReadWriteInterface
         $operation->setDisposition($source['disposition']);
         $operation->setChannel($source['channel']);
         $operation->setBatchId($source['batchId']);
+        $operation->setPreconditions($source['preconditions']);
 
         return $operation;
     }
@@ -55,7 +56,8 @@ class Storage implements StorageInterface, ReadWriteInterface
                 'disposition' => $operation->getDisposition(),
                 'batchId' => $operation->getBatchId(),
                 'options' => $operation->getOptions(),
-                'channel' => $operation->getChannel()
+                'channel' => $operation->getChannel(),
+                'preconditions' => $operation->getPreconditions()
             ]
         ];
 
