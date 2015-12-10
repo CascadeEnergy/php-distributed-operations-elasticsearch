@@ -45,9 +45,13 @@ class Provider implements ProviderInterface, ReadOnlyInterface
         }
 
         $now = time() * 1000;
-        $must[] = ['range' => ['preconditions.notBefore' => ['lt' => $now]]];
 
-        $query = ['bool' => ['filter' => $must]];
+        $should = [
+            ['range' => ['preconditions.notBefore' => ['lt' => $now]]],
+            ['missing' => ['field' => 'preconditions.notBefore']]
+        ];
+
+        $query = ['bool' => ['filter' => $must, 'should' => $should, 'minimum_should_match' => 1]];
 
         $body = [
             'query' => [
