@@ -64,7 +64,7 @@ class Provider implements ProviderInterface, ReadOnlyInterface
 
         $searchParams = [
             'index' => $this->indexName,
-            'scroll' => $this->scrollTime,
+            'size' => 100,
             'body' => $body
         ];
 
