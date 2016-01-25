@@ -46,18 +46,22 @@ class Storage implements StorageInterface, ReadWriteInterface
     public function store(OperationInterface $operation)
     {
         $indexName = $operation->getStorageAttribute('indexName');
+        $dateTime = new \DateTime('now', new \DateTimeZone('UTC'));
 
         if (empty($indexName)) {
-            $dateTime = new \DateTime('now', new \DateTimeZone('UTC'));
             $dateTimeFormatted = $dateTime->format('Y-m');
             $indexName = "{$this->writeToIndex}-$dateTimeFormatted";
             $operation->setStorageAttribute('indexName', $indexName);
         }
 
+        $operation->setModifiedTimestamp($dateTime);
+
         $parameters = [
             'index' => $indexName,
             'type' => $operation->getType(),
             'body' => [
+                'createdTimestamp' => $operation->getCreatedTimestamp(),
+                'modifiedTimestamp' => $operation->getModifiedTimestamp(),
                 'state' => $operation->getState(),
                 'disposition' => $operation->getDisposition(),
                 'batchId' => $operation->getBatchId(),

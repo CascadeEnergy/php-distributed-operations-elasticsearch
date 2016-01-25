@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cberube/php-distributed-operations.git",
-                "reference": "b20b4d54a2d252168afd9e4ded779ac22e6ff93d"
+                "reference": "8e3cb8a8415c6969df3f0014a7a989ed3e45fd6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cberube/php-distributed-operations/zipball/b20b4d54a2d252168afd9e4ded779ac22e6ff93d",
-                "reference": "b20b4d54a2d252168afd9e4ded779ac22e6ff93d",
+                "url": "https://api.github.com/repos/cberube/php-distributed-operations/zipball/8e3cb8a8415c6969df3f0014a7a989ed3e45fd6a",
+                "reference": "8e3cb8a8415c6969df3f0014a7a989ed3e45fd6a",
                 "shasum": ""
             },
             "type": "library",
@@ -40,20 +40,20 @@
             "support": {
                 "source": "https://github.com/cberube/php-distributed-operations/tree/0.1"
             },
-            "time": "2015-12-09 18:11:35"
+            "time": "2016-01-25 20:13:45"
         },
         {
             "name": "elasticsearch/elasticsearch",
-            "version": "v2.1.2",
+            "version": "v2.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/elastic/elasticsearch-php.git",
-                "reference": "6256a76072f8e17046ae0fbe672a0985f6cd531a"
+                "reference": "add7f77f8e388d7d24df6d204c0be16bbb6c57c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/6256a76072f8e17046ae0fbe672a0985f6cd531a",
-                "reference": "6256a76072f8e17046ae0fbe672a0985f6cd531a",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/add7f77f8e388d7d24df6d204c0be16bbb6c57c4",
+                "reference": "add7f77f8e388d7d24df6d204c0be16bbb6c57c4",
                 "shasum": ""
             },
             "require": {
@@ -94,7 +94,7 @@
                 "elasticsearch",
                 "search"
             ],
-            "time": "2015-12-01 22:25:13"
+            "time": "2016-01-08 22:58:44"
         },
         {
             "name": "guzzlehttp/ringphp",
@@ -686,16 +686,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.19",
+            "version": "4.8.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "b2caaf8947aba5e002d42126723e9d69795f32b4"
+                "reference": "ea76b17bced0500a28098626b84eda12dbcf119c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b2caaf8947aba5e002d42126723e9d69795f32b4",
-                "reference": "b2caaf8947aba5e002d42126723e9d69795f32b4",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ea76b17bced0500a28098626b84eda12dbcf119c",
+                "reference": "ea76b17bced0500a28098626b84eda12dbcf119c",
                 "shasum": ""
             },
             "require": {
@@ -754,7 +754,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-11-30 08:18:59"
+            "time": "2015-12-12 07:45:58"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1185,16 +1185,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002"
+                "reference": "3df409958a646dad2bc5046c3fb671ee24a1a691"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002",
-                "reference": "177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/3df409958a646dad2bc5046c3fb671ee24a1a691",
+                "reference": "3df409958a646dad2bc5046c3fb671ee24a1a691",
                 "shasum": ""
             },
             "require": {
@@ -1230,7 +1230,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-30 12:36:17"
+            "time": "2015-12-26 13:39:53"
         }
     ],
     "aliases": [],
