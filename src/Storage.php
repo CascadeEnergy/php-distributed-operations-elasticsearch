@@ -62,7 +62,7 @@ class Storage implements StorageInterface, ReadWriteInterface
             $operation->setStorageAttribute('indexName', $indexName);
         }
 
-        $operation->setModifiedTimestamp($dateTime);
+        $operation->setModifiedTimestamp($dateTime->format('c'));
 
         $parameters = [
             'index' => $indexName,
