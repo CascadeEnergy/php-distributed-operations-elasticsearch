@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cberube/php-distributed-operations.git",
-                "reference": "8e3cb8a8415c6969df3f0014a7a989ed3e45fd6a"
+                "reference": "ef2df9e1475242ff4355282149da335f7a114db3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cberube/php-distributed-operations/zipball/8e3cb8a8415c6969df3f0014a7a989ed3e45fd6a",
-                "reference": "8e3cb8a8415c6969df3f0014a7a989ed3e45fd6a",
+                "url": "https://api.github.com/repos/cberube/php-distributed-operations/zipball/ef2df9e1475242ff4355282149da335f7a114db3",
+                "reference": "ef2df9e1475242ff4355282149da335f7a114db3",
                 "shasum": ""
             },
             "type": "library",
@@ -40,7 +40,7 @@
             "support": {
                 "source": "https://github.com/cberube/php-distributed-operations/tree/0.1"
             },
-            "time": "2016-01-25 20:13:45"
+            "time": "2016-01-25 20:21:22"
         },
         {
             "name": "elasticsearch/elasticsearch",

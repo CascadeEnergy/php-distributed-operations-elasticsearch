@@ -27,6 +27,8 @@ class Storage implements StorageInterface, ReadWriteInterface
 
         $source = $hit['_source'];
 
+        $operation->setCreatedTimestamp($source['createdTimestamp']);
+        $operation->setModifiedTimestamp($source['modifiedTimestamp']);
         $operation->setOptions($source['options']);
         $operation->setState($source['state']);
         $operation->setDisposition($source['disposition']);
