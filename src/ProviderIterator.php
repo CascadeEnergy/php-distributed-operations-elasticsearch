@@ -23,8 +23,6 @@ class ProviderIterator implements \Iterator
         $source = $hit['_source'];
 
         $operation = new Operation($hit['_type'], $source['batchId'], $source['options']);
-        $operation->setCreatedTimestamp($source['createdTimestamp']);
-        $operation->setModifiedTimestamp($source['modifiedTimestamp']);
         $operation->setState($source['state']);
         $operation->setDisposition($source['disposition']);
         $operation->setId($hit['_id']);
@@ -36,6 +34,14 @@ class ProviderIterator implements \Iterator
 
         if (array_key_exists('preconditions', $source)) {
             $operation->setPreconditions($source['preconditions']);
+        }
+
+        if (array_key_exists('createdTimestamp', $source)) {
+            $operation->setCreatedTimestamp($source['createdTimestamp']);
+        }
+
+        if (array_key_exists('modifiedTimestamp', $source)) {
+            $operation->setModifiedTimestamp($source['modifiedTimestamp']);
         }
 
         return $operation;

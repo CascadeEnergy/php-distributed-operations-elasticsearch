@@ -27,8 +27,6 @@ class Storage implements StorageInterface, ReadWriteInterface
 
         $source = $hit['_source'];
 
-        $operation->setCreatedTimestamp($source['createdTimestamp']);
-        $operation->setModifiedTimestamp($source['modifiedTimestamp']);
         $operation->setOptions($source['options']);
         $operation->setState($source['state']);
         $operation->setDisposition($source['disposition']);
@@ -40,6 +38,14 @@ class Storage implements StorageInterface, ReadWriteInterface
 
         if (array_key_exists('preconditions', $source)) {
             $operation->setPreconditions($source['preconditions']);
+        }
+
+        if (array_key_exists('createdTimestamp', $source)) {
+            $operation->setCreatedTimestamp($source['createdTimestamp']);
+        }
+
+        if (array_key_exists('modifiedTimestamp', $source)) {
+            $operation->setModifiedTimestamp($source['modifiedTimestamp']);
         }
 
         return $operation;
