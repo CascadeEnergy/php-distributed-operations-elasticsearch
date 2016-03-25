@@ -31,7 +31,10 @@ class Storage implements StorageInterface, ReadWriteInterface
         $operation->setState($source['state']);
         $operation->setDisposition($source['disposition']);
         $operation->setBatchId($source['batchId']);
-        $operation->setFamilyId($source['familyId']);
+
+        if (array_key_exists('familyId', $source)) {
+            $operation->setFamilyId($source['familyId']);
+        }
 
         if (array_key_exists('channel', $source)) {
             $operation->setChannel($source['channel']);
