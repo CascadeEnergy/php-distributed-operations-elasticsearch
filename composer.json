@@ -22,11 +22,11 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.com:cberube/php-distributed-operations.git"
+      "url": "git@github.com:CascadeEnergy/php-distributed-operations.git"
     }
   ],
   "require": {
-    "cascade-energy/php-distributed-operations": "0.1.x-dev",
+    "cascade-energy/php-distributed-operations": "dev-master",
     "elasticsearch/elasticsearch": "^2.0"
   },
   "require-dev": {
