@@ -19,14 +19,8 @@
       "CascadeEnergy\\Tests\\DistributedOperations\\Elasticsearch\\": "tests"
     }
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:CascadeEnergy/php-distributed-operations.git"
-    }
-  ],
   "require": {
-    "cascade-energy/php-distributed-operations": "dev-master",
+    "cascade-energy/php-distributed-operations": "^1.0",
     "elasticsearch/elasticsearch": "^2.0"
   },
   "require-dev": {
