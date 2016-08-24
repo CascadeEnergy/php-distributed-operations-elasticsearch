@@ -53,13 +53,21 @@ class Provider implements ProviderInterface, ReadOnlyInterface
 
         $query = ['bool' => ['filter' => $must, 'should' => $should, 'minimum_should_match' => 1]];
 
-        $body = [
-            'query' => [
-                'function_score' => [
-                    'query' => $query,
-                    'random_score' => new \stdClass()
-                ]
+        $sort = [
+            "_script" => [
+                "script" => "doc['createdTimestamp'].value % slice",
+                "type" => "number",
+                "params" => [
+                    "slice" => floor(mt_rand(1, 2500))
+                ],
+                "order" => "asc",
+                "lang" => "expression"
             ]
+        ];
+
+        $body = [
+            'query' => $query,
+            'sort' => $sort
         ];
 
         $searchParams = [
